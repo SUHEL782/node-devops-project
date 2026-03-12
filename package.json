@@ -1,13 +1,22 @@
 {
   "name": "devops-project",
   "version": "1.0.0",
-  "description": "",
+  "description": "Node.js DevOps Application with Docker, MongoDB, Redis and CloudWatch logging",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"No tests specified\" && exit 0"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "node",
+    "devops",
+    "docker",
+    "mongodb",
+    "redis",
+    "cloudwatch"
+  ],
+  "author": "Suhel",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {

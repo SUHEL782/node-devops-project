@@ -18,7 +18,7 @@ services:
     logging:
       driver: "awslogs"
       options:
-        awslogs-region: us-east-1
+        awslogs-region: eu-north-1
         awslogs-group: node-devops-app
         awslogs-stream: app-logs
 
