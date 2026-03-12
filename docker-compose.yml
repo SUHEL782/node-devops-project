@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+
+  app:
+    build: .
+    container_name: node-app
+    ports:
+      - "8090:8090"
+
+    env_file:
+      - .env
+
+    depends_on:
+      - mongo
+      - redis
+
+    logging:
+      driver: "awslogs"
+      options:
+        awslogs-region: us-east-1
+        awslogs-group: node-devops-app
+        awslogs-stream: app-logs
+
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:8090/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  mongo:
+    image: mongo:7
+    container_name: mongodb
+
+    volumes:
+      - mongo-data:/data/db
+
+    ports:
+      - "27017:27017"
+
+  redis:
+    image: redis:7
+    container_name: redis
+
+    ports:
+      - "6379:6379"
+
+volumes:
+  mongo-data:
