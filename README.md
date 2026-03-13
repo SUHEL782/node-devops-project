@@ -56,9 +56,9 @@ Node.js → Redis (redis:6379)
 
 ---
 
-# Project Structure
+## Project Structure
 
-
+```
 node-devops-project
 │
 ├── app.js
@@ -70,10 +70,8 @@ node-devops-project
 ├── .dockerignore
 ├── .gitignore
 └── README.md
-
-
+```
 ---
-
 # Environment Variables
 
 Configuration is managed through environment variables.
