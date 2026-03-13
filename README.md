@@ -19,7 +19,7 @@ The system is designed to simulate a simple production-style backend environment
 ---
 
 # Architecture
-![Architecture Diagram](https://github.com/SUHEL782/MERN-Ecommerce/blob/main/Architecture.png)
+![Architecture Diagram](https://github.com/SUHEL782/node-devops-project/blob/main/Architecture.png)
 
 ### Service Communication
 
