@@ -1,85 +1,240 @@
 # Node DevOps Project
 
-This project demonstrates containerizing a Node.js application using Docker Compose with MongoDB and Redis.
+This project demonstrates how to containerize a Node.js backend application using **Docker** and orchestrate services using **Docker Compose**.  
+The application connects to **MongoDB** for data storage and **Redis** for caching.
 
-## Technologies
-
-Node.js  
-Docker  
-Docker Compose  
-MongoDB  
-Redis  
-AWS CloudWatch (Monitoring)
+The system is designed to simulate a simple production-style backend environment using containerized services.
 
 ---
 
-## Project Structure
+# Technologies Used
+
+- Node.js
+- Express.js
+- Docker
+- Docker Compose
+- MongoDB
+- Redis
+
+---
+
+# Architecture
+
+The application architecture consists of three containerized services managed by Docker Compose.
+
+        +--------------------+
+        |      Client        |
+        | (Browser / API)   |
+        +---------+----------+
+                  |
+                  v
+        +--------------------+
+        |    Node.js App     |
+        |   (Express API)    |
+        +---------+----------+
+                  |
+      +-----------+-----------+
+      |                       |
+      v                       v
+
++-------------+ +-------------+
+| MongoDB | | Redis |
+| Database | | Cache |
++-------------+ +-------------+
+
+
+### Service Communication
+
+Docker Compose automatically creates a **shared network**, allowing containers to communicate using service names.
+
+Example:
+
+
+Node.js → MongoDB (mongo:27017)
+Node.js → Redis (redis:6379)
+
+
+---
+
+# Project Structure
+
 
 node-devops-project
+│
+├── app.js
+├── package.json
+├── package-lock.json
+├── Dockerfile
+├── docker-compose.yml
+├── .env.example
+├── .dockerignore
+├── .gitignore
+└── README.md
 
-app.js  
-package.json  
-Dockerfile  
-docker-compose.yml  
-.env.example  
-README.md  
 
 ---
 
-## Setup Instructions
+# Environment Variables
 
-Clone repository
+Configuration is managed through environment variables.
 
-git clone <repo-url>
+Example file:
 
-cd node-devops-project
+`.env.example`
 
-Create environment file
+
+PORT=8090
+
+MONGO_URI=mongodb://mongo:27017/devopsdb
+
+REDIS_HOST=redis
+REDIS_PORT=6379
+
+
+Before running the project, create a local `.env` file.
+
 
 cp .env.example .env
 
-Run containers
+
+---
+
+# Running the Application
+
+## 1 Clone Repository
+
+
+git clone https://github.com/SUHEL782/node-devops-project.git
+
+cd node-devops-project
+
+
+---
+
+## 2 Create Environment File
+
+
+cp .env.example .env
+
+
+---
+
+## 3 Build and Run Containers
+
 
 docker compose up --build
 
+
+Docker Compose will start:
+
+- Node.js Application
+- MongoDB Database
+- Redis Cache
+
 ---
 
-## Application URL
+# Application URL
+
 
 http://localhost:8090
 
+
 ---
 
-## API Endpoints
+# API Endpoints
+
+### Root Endpoint
+
 
 GET /
 
-Returns confirmation message.
+
+Response
+
+
+{
+"message": "Node.js DevOps Application Running"
+}
+
+
+---
+
+### Health Check Endpoint
+
 
 GET /health
 
-Returns application health status.
+
+Example Response
+
+
+{
+"status": "OK",
+"mongo": "UP",
+"redis": "UP"
+}
+
+
+This endpoint verifies connectivity with MongoDB and Redis.
 
 ---
 
-## Services
+# Docker Services
 
-Node.js Application  
-MongoDB Database  
-Redis Cache  
+## Application Service
+
+- Builds image from `Dockerfile`
+- Runs Node.js Express application
+- Exposes port **8090**
+
+## MongoDB Service
+
+- Uses official MongoDB image
+- Data persisted using Docker volumes
+
+## Redis Service
+
+- Uses official Redis image
+- Used for caching layer
 
 ---
 
-## Data Persistence
+# Data Persistence
 
-MongoDB data is stored using Docker volumes to ensure persistence.
+MongoDB uses Docker volumes to ensure that data persists even if containers are restarted.
+
+
+volumes:
+mongo-data:
+
 
 ---
 
-## Bonus Features Implemented
+# DevOps Best Practices Implemented
 
-Container health checks  
-Multi-stage Docker build  
-Application logging with Winston  
-Docker image optimization  
-Monitoring using AWS CloudWatch
+This project implements several DevOps best practices:
+
+- Containerized application using Docker
+- Multi-stage Docker build
+- Service orchestration using Docker Compose
+- Environment-based configuration
+- Container health checks
+- MongoDB persistent storage using volumes
+- Docker image optimization using `.dockerignore`
+- Logging with Winston
+
+---
+
+# Stopping the Application
+
+To stop containers:
+
+
+docker compose down
+
+
+---
+
+# Author
+
+Suhel Khan
