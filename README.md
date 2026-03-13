@@ -191,6 +191,8 @@ Stopping the Application
 To stop containers:
 
 docker compose down
+----
 Author
 
 Suhel Khan
+----
