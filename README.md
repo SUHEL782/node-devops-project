@@ -3,11 +3,11 @@
 This project demonstrates how to containerize a Node.js backend application using **Docker** and orchestrate services using **Docker Compose**.  
 The application connects to **MongoDB** for data storage and **Redis** for caching.
 
-The system is designed to simulate a simple production-style backend environment using containerized services.
+The system simulates a simple production-style backend environment using containerized services.
 
 ---
 
-# Technologies Used
+## Technologies Used
 
 - Node.js
 - Express.js
@@ -18,7 +18,8 @@ The system is designed to simulate a simple production-style backend environment
 
 ---
 
-# Architecture
+## Architecture
+
 ![Architecture Diagram](https://github.com/SUHEL782/node-devops-project/blob/main/Architecture.png)
 
 ### Service Communication
@@ -49,14 +50,14 @@ node-devops-project
 ├── .gitignore
 └── README.md
 ```
+
 ---
-# Environment Variables
+
+## Environment Variables
 
 Configuration is managed through environment variables.
 
-Example file:
-
-`.env.example`
+Example `.env.example`:
 
 
 PORT=8090
@@ -67,7 +68,7 @@ REDIS_HOST=redis
 REDIS_PORT=6379
 
 
-Before running the project, create a local `.env` file.
+Before running the project, create a local `.env` file:
 
 
 cp .env.example .env
@@ -75,9 +76,9 @@ cp .env.example .env
 
 ---
 
-# Running the Application
+## Running the Application
 
-## 1 Clone Repository
+### 1. Clone Repository
 
 
 git clone https://github.com/SUHEL782/node-devops-project.git
@@ -85,17 +86,13 @@ git clone https://github.com/SUHEL782/node-devops-project.git
 cd node-devops-project
 
 
----
-
-## 2 Create Environment File
+### 2. Create Environment File
 
 
 cp .env.example .env
 
 
----
-
-## 3 Build and Run Containers
+### 3. Build and Run Containers
 
 
 docker compose up --build
@@ -109,7 +106,7 @@ Docker Compose will start:
 
 ---
 
-# Application URL
+## Application URL
 
 
 http://localhost:8090
@@ -117,7 +114,7 @@ http://localhost:8090
 
 ---
 
-# API Endpoints
+## API Endpoints
 
 ### Root Endpoint
 
@@ -125,92 +122,75 @@ http://localhost:8090
 GET /
 
 
-Response
+Response:
 
-
+```json
 {
-"message": "Node.js DevOps Application Running"
+  "message": "Node.js DevOps Application Running"
 }
-
-
----
-
-### Health Check Endpoint
-
-
+Health Check Endpoint
 GET /health
 
-
-Example Response
-
+Example Response:
 
 {
-"status": "OK",
-"mongo": "UP",
-"redis": "UP"
+  "status": "OK",
+  "mongo": "UP",
+  "redis": "UP"
 }
-
 
 This endpoint verifies connectivity with MongoDB and Redis.
 
----
+Docker Services
+Application Service
 
-# Docker Services
+Builds image from Dockerfile
 
-## Application Service
+Runs Node.js Express application
 
-- Builds image from `Dockerfile`
-- Runs Node.js Express application
-- Exposes port **8090**
+Exposes port 8090
 
-## MongoDB Service
+MongoDB Service
 
-- Uses official MongoDB image
-- Data persisted using Docker volumes
+Uses official MongoDB image
 
-## Redis Service
+Data persisted using Docker volumes
 
-- Uses official Redis image
-- Used for caching layer
+Redis Service
 
----
+Uses official Redis image
 
-# Data Persistence
+Used for caching layer
+
+Data Persistence
 
 MongoDB uses Docker volumes to ensure that data persists even if containers are restarted.
 
-
 volumes:
-mongo-data:
+  mongo-data:
+DevOps Best Practices Implemented
 
+Containerized application using Docker
 
----
+Multi-stage Docker build
 
-# DevOps Best Practices Implemented
+Service orchestration using Docker Compose
 
-This project implements several DevOps best practices:
+Environment-based configuration
 
-- Containerized application using Docker
-- Multi-stage Docker build
-- Service orchestration using Docker Compose
-- Environment-based configuration
-- Container health checks
-- MongoDB persistent storage using volumes
-- Docker image optimization using `.dockerignore`
-- Logging with Winston
+Container health checks
 
----
+MongoDB persistent storage using volumes
 
-# Stopping the Application
+Docker image optimization using .dockerignore
+
+Logging with Winston
+
+Stopping the Application
 
 To stop containers:
 
-
 docker compose down
-
-
----
-
-# Author
+Author
 
 Suhel Khan
