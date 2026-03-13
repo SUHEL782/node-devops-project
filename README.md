@@ -19,29 +19,7 @@ The system is designed to simulate a simple production-style backend environment
 ---
 
 # Architecture
-
-The application architecture consists of three containerized services managed by Docker Compose.
-
-        +--------------------+
-        |      Client        |
-        | (Browser / API)   |
-        +---------+----------+
-                  |
-                  v
-        +--------------------+
-        |    Node.js App     |
-        |   (Express API)    |
-        +---------+----------+
-                  |
-      +-----------+-----------+
-      |                       |
-      v                       v
-
-+-------------+ +-------------+
-| MongoDB | | Redis |
-| Database | | Cache |
-+-------------+ +-------------+
-
+![Architecture Diagram](https://github.com/SUHEL782/MERN-Ecommerce/blob/main/Architecture.png)
 
 ### Service Communication
 
