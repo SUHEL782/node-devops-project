@@ -5,6 +5,7 @@ services:
   app:
     build: .
     container_name: node-app
+
     ports:
       - "8090:8090"
 
@@ -14,13 +15,6 @@ services:
     depends_on:
       - mongo
       - redis
-
-    logging:
-      driver: "awslogs"
-      options:
-        awslogs-region: eu-north-1
-        awslogs-group: node-devops-app
-        awslogs-stream: app-logs
 
     healthcheck:
       test: ["CMD", "wget", "--spider", "http://localhost:8090/health"]
